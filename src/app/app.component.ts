@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { AgGridNg2 } from 'ag-grid-angular';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Ag Grid Example';
-
+  @ViewChild('agGrid') agGrid: AgGridNg2;
   column = [
     {
+      checkboxSelection: true,
       'headerName': 'Name',
       'field': 'name'
     },
@@ -41,5 +43,12 @@ export class AppComponent {
     }
   ];
 
+  getSelectedRows() {
+    const selectedNodes = this.agGrid.api.getSelectedNodes();
+    const selectedData = selectedNodes.map( node => node.data );
+    const selectedDataStringPresentation = selectedData
+    .map( node => node.name + ' ' + node.mobile + ' ' + node.state).join(', ');
+    alert(`Selected nodes: ${selectedDataStringPresentation}`);
+  }
 
 }
