@@ -6,16 +6,17 @@
 </div>
 
 <div class="container">
-    <button (click)="getSelectedRows()">Get Selected Rows</button>
+    <!-- <button (click)="getSelectedRows()">Get Selected Rows</button> -->
   <div>
     <ag-grid-angular
     #agGrid
      class="ag-theme-balham" 
-    [columnDefs]="column" 
-    [rowData]="row"
+    [columnDefs]="columnDefs" 
+    
     [enableSorting]="true"
     [enableFilter]="true"
     rowSelection="multiple"
+    (gridReady)="onGridReddy($event)"
     >
 
     </ag-grid-angular>
